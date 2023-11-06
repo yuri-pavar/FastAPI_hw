@@ -2,6 +2,7 @@ from enum import Enum
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import time
+from typing import List
 
 
 app = FastAPI()
@@ -56,7 +57,7 @@ def get_post() -> Timestamp:
 # в сваггере почему-то kind - необязательный параметр
 @app.get('/dog')
 # def get_dogs(kind: DogType | None = None) -> DogType:
-def get_dogs(kind: DogType) -> list[Dog]:
+def get_dogs(kind: DogType) -> List[Dog]:
     return [i for i in dogs_db.values() if i.kind == kind]
 
 
