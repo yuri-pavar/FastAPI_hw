@@ -13,7 +13,6 @@ class DogType(str, Enum):
     dalmatian = "dalmatian"
 
 class Dog(BaseModel):
-    # name: str = Field(min_length=2, max_length=20)
     name: str
     pk: int
     kind: DogType
@@ -40,9 +39,7 @@ post_db = [
 
 @app.get('/')
 def root():
-    # return "Clinic App"
-    # return post_db
-    return dogs_db
+    return post_db
 
 
 @app.post('/post')
@@ -54,9 +51,7 @@ def get_post() -> Timestamp:
     return new_obj
 
 
-# в сваггере почему-то kind - необязательный параметр
 @app.get('/dog')
-# def get_dogs(kind: DogType | None = None) -> DogType:
 def get_dogs(kind: DogType) -> List[Dog]:
     return [i for i in dogs_db.values() if i.kind == kind]
 
